@@ -1,5 +1,6 @@
 import java.util.*;
 import java.io.*;
+import java.text.DecimalFormat;
 
 public class InheritanceQuizzerRunner {
 
@@ -22,16 +23,17 @@ public class InheritanceQuizzerRunner {
 		questions.add(new Question("Hobby x = new Hobby();\n\tx.haveFun();","A"));
 		questions.add(new Question("Hobby x = new Hobby();\n\tx.wasteTime();","B"));
 		questions.add(new Question("Hobby x = new Hobby();\n\tx.seeTheWorld();","E"));
+		questions.add(new Question("Hobby x = new Hobby();\n\t((Flying)x).seeTheWorld();","E"));
 		questions.add(new Question("Hobby x = new Flying();\n\tx.haveFun();","A"));
 		questions.add(new Question("Hobby x = new Flying();\n\tx.wasteTime();","B"));
 		questions.add(new Question("Hobby x = new Flying();\n\tx.seeTheWorld();","E"));
-		questions.add(new Question("Flying x = new Hobby();\n\tx.haveFun();",""));
-		questions.add(new Question("Flying x = new Hobby();\n\tx.wasteTime();",""));
-		questions.add(new Question("Flying x = new Hobby();\n\tx.seeTheWorld();",""));
-		questions.add(new Question("Flying x = new Flying();\n\tx.haveFun();",""));
-		questions.add(new Question("Flying x = new Flying();\n\tx.wasteTime();",""));
-		questions.add(new Question("Flying x = new Flying();\n\tx.seeTheWorld();",""));
+		questions.add(new Question("Hobby x = new Flying();\n\t((Flying)x).seeTheWorld();","D"));
+		questions.add(new Question("Flying x = new Flying();\n\tx.haveFun();","C"));
+		questions.add(new Question("Flying x = new Flying();\n\tx.wasteTime();","B"));
+		questions.add(new Question("Flying x = new Flying();\n\tx.seeTheWorld();","D"));
+		questions.add(new Question("Flying x = new Flying();\n\t((Flying)x).seeTheWorld();","D"));
 		
+		Collections.shuffle(questions);
 		Collections.shuffle(questions);
 		
 		return questions;
@@ -53,10 +55,15 @@ public class InheritanceQuizzerRunner {
 			
 			if (input.equals(a.getAnswer())) {
 				score ++;
+				System.out.println("Correct!\n");
+			}
+			else {
+				System.out.println("Incorrect\n");
 			}
 		}
 		
-		System.out.println("Your final score is " + score + "/12 for a percentage of " + (score/12*100) + "%.");
+		DecimalFormat d = new DecimalFormat("0.00");
+		System.out.println("Your final score is " + score + "/12 for a percentage of " + d.format(((double)score/12*100)) + "%.");
 	}
 
 }
